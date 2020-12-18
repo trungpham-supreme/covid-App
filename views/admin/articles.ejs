@@ -1,0 +1,23 @@
+<%- include('../_layouts/adminheader') %>
+
+	<div class="container">
+		<div class="mb-4">Thông tin mới nhất</div>
+		<a href="/admin/create" class="btn btn-success">Thêm thông tin</a>
+
+		<% articles.forEach(article => {%>
+			<div class="card mt-4">
+				<div class="card-body">
+					<h4 class="card-title"><%= article.title%></h4>
+					<div class="card-subtitle text-muted mb-2">
+						<%= article.createdAt.toLocaleDateString(); %>
+					</div>
+					<div class="card-text mb-2"><%= article.description%></div>
+					<a href="/admin/articles/<%= article.slug%>" class="btn btn-primary">Read more</a>
+				</div>
+				
+			</div>
+		<% }) %>
+	</div>
+
+
+<%- include('../_layouts/adminfooter') %>

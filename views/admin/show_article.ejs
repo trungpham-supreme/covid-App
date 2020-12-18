@@ -1,0 +1,14 @@
+<%- include('../_layouts/adminheader') %>
+
+	<div class="container">
+		<h1 class="mb-1"><%= article.title%></h1>
+		<div><%= article.createdAt.toLocaleDateString()%></div>	
+		<div><%= article.markdown%></div>	
+		<a href="/admin/articles" class="btn btn-secondary">All articles</a>
+		<a href="/admin/articles/edit/<%= article.slug%>" class="btn btn-info">Edit</a>
+	</div>
+
+
+
+
+<%- include('../_layouts/adminfooter') %>

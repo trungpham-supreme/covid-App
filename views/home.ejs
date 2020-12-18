@@ -1,0 +1,42 @@
+<%- include('./_layouts/adminheader') %>
+
+  <div class="container-fluid stats text-center">
+    <div class="row latest-report">
+      <div class="col-sm-3 country">
+        <div class="name">Quốc gia...</div>
+        <div class="change-country">Thay đổi</div>
+        <div class="search-country hide">
+          <div class="search-box">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Tìm kiếm quốc gia..."
+            />
+            <img class="close" src="./images/close.png" alt="" />
+          </div>
+          <div class="country-list"></div>
+        </div>
+      </div>
+      <div class="col-sm-3 total-cases">
+        <div class="title">Tổng số ca nhiễm</div>
+        <div class="value">0</div>
+        <div class="new-value">+0</div>
+      </div>
+      <div class="col-sm-3 recovered">
+        <div class="title">Đã bình phục</div>
+        <div class="value">0</div>
+        <div class="new-value">+0</div>
+      </div>
+      <div class="col-sm-3 deaths">
+        <div class="title">Số ca tử vong</div>
+        <div class="value">0</div>
+        <div class="new-value">+0</div>
+      </div>
+    </div>
+    <div class="chart">
+      <canvas id="axes_line_chart"></canvas>
+    </div>
+  </div>
+
+<%- include('./_layouts/adminfooter') %>
+  
