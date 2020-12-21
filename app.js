@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 var mongoose = require('mongoose');
 var fileUpload = require('express-fileupload');
+const methodOverride = require('method-override');
+
  
 
 //App use public folder
@@ -12,6 +14,9 @@ app.set('view engine','ejs');
 
 //app use file-upload
 app.use(fileUpload());
+
+//app use methodOverride
+app.use(methodOverride('_method'));
 
 
 // parse application/x-www-form-urlencoded

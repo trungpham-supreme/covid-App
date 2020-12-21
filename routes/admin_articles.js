@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Article = require('../models/articles');
+const multer = require('multer');
 
 
 
@@ -24,6 +25,12 @@ router.get('/create', (req, res) =>{
 });
 
 
+router.get('/edit/:id',async (req, res) =>{
+	const article = await Article.findById(req.params.id);
+	res.render('admin/edit_articles',{article: article});
+});
+
+
 router.post('/create', async (req, res)=>{
 	let article = new Article({
 		title: req.body.title,
@@ -39,6 +46,30 @@ router.post('/create', async (req, res)=>{
 	}
 });
 
+router.put('/:id',async(req, res, next)=>{
+	req.article = await Article.findById(req.params.id);
+	next();
+},saveArticleAndRedirect('edit'));
+
+router.delete('/:id', async(req, res)=>{
+	await Article.findByIdAndDelete(req.params.id);
+	res.redirect('/admin/articles');
+});
+
+function saveArticleAndRedirect(path) {
+  return async (req, res) => {
+    let article = req.article
+    article.title = req.body.title
+    article.description = req.body.description
+    article.markdown = req.body.markdown
+    try {
+      article = await article.save()
+      res.redirect(`/admin/articles/${article.slug}`)
+    } catch (e) {
+      res.render(`admin/${path}`, { article: article })
+    }
+  }
+}
 
 
 

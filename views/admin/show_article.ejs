@@ -5,7 +5,7 @@
 		<div><%= article.createdAt.toLocaleDateString()%></div>	
 		<div><%= article.markdown%></div>	
 		<a href="/admin/articles" class="btn btn-secondary">All articles</a>
-		<a href="/admin/articles/edit/<%= article.slug%>" class="btn btn-info">Edit</a>
+		<a href="/admin/edit/<%= article.id%>" class="btn btn-info">Edit</a>
 	</div>
 
 
