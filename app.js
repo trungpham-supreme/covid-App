@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 var mongoose = require('mongoose');
-var fileUpload = require('express-fileupload');
 const methodOverride = require('method-override');
 
  
@@ -12,8 +11,6 @@ app.use(express.static("public"));
 //App set ejs
 app.set('view engine','ejs');
 
-//app use file-upload
-app.use(fileUpload());
 
 //app use methodOverride
 app.use(methodOverride('_method'));
@@ -37,12 +34,17 @@ db.once('open', function() {
 var home = require('./routes/home.js');
 var hotline = require('./routes/hotline.js');
 var articles = require('./routes/admin_articles.js')
+var news = require('./routes/articles.js')
 
 
 
 app.use('/',home);
 app.use('/hotline',hotline);
 app.use('/admin',articles);
+app.use('/web',news);
+
+
+
 
 app.listen(3000, function(){
 	console.log('Server staring on port 3000');

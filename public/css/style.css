@@ -167,7 +167,16 @@ nav a{
 	justify-content: center;
 }
 
-a{
-	color: #b8b894;
+.list-group li a{
+	color: black;
+	font-size: 18px;
+	text-decoration: bold;
 }
 
+.news{
+	border-bottom: solid 2px #ccccb3;
+}
+
+.list-news{
+	border: solid 2px #ccccb3;
+}

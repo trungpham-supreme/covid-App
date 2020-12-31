@@ -1,0 +1,53 @@
+<%- include('./_layouts/adminheader') %>
+
+
+
+	<div class="container mt-4 mb-4">
+		<div class="row">
+		<div class="col-sm-3">
+				<ul class="list-group">
+					  <li class="list-group-item"><a href="info">Thông tin covid-19 <img width="40" height="40" src="/images/icons8vr.png"></a></li>
+					  <li class="list-group-item"><a href="news">Tin tức mới nhất <img width="40" height="40" src="/images/news.png"></a></li>
+					  <li class="list-group-item"><a href="">Điều cần biết  <img width="40" height="35" src="/images/know.png"></a></li>
+					</ul>
+			</div>			
+			<div class="col-sm-6">
+				<div><h2 class="mb-1"><%= article.title%></h2></div>
+				<div class="card-subtitle text-muted mb-2">
+						<%= article.createdAt.toLocaleDateString(); %>
+					</div>
+					<div><b><%= article.description%></b></div>
+				<figure class="figure">
+					<img src="/uploads/<%= article.image%>"  class="img-fluid">
+					<figcaption class="figure-caption"><%= article.cmtImage%></figcaption>
+				</figure>
+				<div><%= article.description%></div>
+				<div><%= article.createdAt.toLocaleDateString()%></div>	
+				<div><%= article.markdown%></div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class=" mt-4 pt-4">
+					<h4><b>Tin mới <img width="30" height="30" src="/images/list-new.png"></b></h4>
+					<% articles.forEach(article => {%>
+						<div class="row list-news">
+							<div class="col-sm-4 pt-4 "><img  src="/uploads/<%= article.image%>" style="width: 90px; height:70px"></div>
+							<div class="card-body col-sm-8">
+								<h6 class="card-title">
+									<a href="/web/news/<%= article.slug%>" style="color:black"><%= article.title%></a>
+								</h6>	
+								<div class="card-subtitle text-muted mb-2">
+									<%= article.createdAt.toLocaleDateString(); %>
+								</div>
+							</div>
+						</div>
+					<% }) %>
+				</div>
+			</div>	
+		</div>	
+	</div>
+
+
+
+
+<%- include('./_layouts/adminfooter') %>

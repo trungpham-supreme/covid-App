@@ -1,0 +1,34 @@
+<%- include('./_layouts/adminheader') %>
+
+	<div class="container mt-4 mb-4">				
+		
+		<div class="row">
+			<div class="col-sm-3">
+				<ul class="list-group">
+					  <li class="list-group-item"><a href="info">Thông tin covid-19 <img width="40" height="40" src="/images/icons8vr.png"></a></li>
+					  <li class="list-group-item"><a href="news">Tin tức mới nhất <img width="40" height="40" src="/images/news.png"></a></li>
+					  <li class="list-group-item"><a href="">Điều cần biết  <img width="40" height="35" src="/images/know.png"></a></li>
+					</ul>
+			</div>
+			<div class="col-sm-9">
+				<div class="mb-4"><h2><b>Tin mới cập nhật</b></h2></div>
+				<% articles.forEach(article => {%>
+				<div class="row mt-4 news">
+					<div class="col-md-2 pt-4"><img src="/uploads/<%= article.image%>" style="width: 130px; height:100px"></div>
+					<div class="card-body col-md-10">
+						<h4 class="card-title">
+							<a href="/web/news/<%= article.slug%>" style="color:black"><%= article.title%></a>
+						</h4>
+						<div class="card-subtitle text-muted mb-2">
+							<%= article.createdAt.toLocaleDateString(); %>
+						</div>
+						<div class="card-text mb-2"><%= article.description%></div>				
+					</div>
+					</div>
+				<% }) %>
+			</div>			
+		</div>	
+	</div>
+
+
+<%- include('./_layouts/adminfooter') %>
