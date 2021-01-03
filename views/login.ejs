@@ -1,0 +1,38 @@
+<%- include('./_layouts/adminheader') %>
+
+  <div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Đăng nhập</h1>
+        <%- include('./partials/messages'); %>
+        <form action="/users/login" method="POST">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="Nhập Email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="Nhập mật khẩu"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+        </form>
+        <p class="lead mt-4">
+          Chưa có tài khoản? <a href="/users/register">Đăng ký</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+<%- include('./_layouts/adminfooter') %>
