@@ -13,10 +13,10 @@
 						<%= article.createdAt.toLocaleDateString(); %>
 					</div>
 					<div class="card-text mb-2"><%= article.description%></div>
-					<a href="/admin/articles/<%= article.slug%>" class="btn btn-primary" >Read more</a>
-					<a href="/admin/edit/<%= article.id%>" class="btn btn-info" >Edit</a>
+					<a href="/admin/articles/<%= article.slug%>" class="btn btn-primary" >Chi tiết</a>
+					<a href="/admin/edit/<%= article.id%>" class="btn btn-info" >Chỉnh sửa</a>
 					<form action="/admin/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
-						<button type="submit" class="btn btn-danger" >Delete</button>
+						<button type="submit" class="btn btn-danger" >Xóa</button>
 					</form>
 				</div>
 				

@@ -1,0 +1,24 @@
+<%- include('../_layouts/adminheader') %>
+
+	<div class="container mt-3 mb-4">
+		<div class="mb-4"><h3>Quản Lý Tài Khoản</h1></div>
+		<% users.forEach(user => {%>
+			<div class="row mt-4">
+				
+				<div class="card-body col-md-10">
+					<h4 class="card-title"><%= user.name%></h4>
+					<div class="card-subtitle text-muted mb-2">
+						<%= user.date.toLocaleDateString(); %>
+					</div>
+					<div class="card-text mb-2"><%= user.email%></div>
+					<a href="/admin/edit/<%= user.id%>" class="btn btn-info" >Chỉnh sửa</a>
+					<form action="/accounts/<%= user.id %>?_method=DELETE" method="POST" class="d-inline">
+						<button type="submit" class="btn btn-danger" >Xóa</button>
+					</form>
+				</div>
+				
+			</div>
+		<% }) %>
+	</div>
+
+<%- include('../_layouts/adminfooter') %>

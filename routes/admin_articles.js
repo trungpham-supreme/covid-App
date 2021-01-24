@@ -5,6 +5,11 @@ const multer  = require('multer');
 const path = require('path');
 var fileUpload = require('express-fileupload');
 
+
+
+
+const {forwardAuthenticated, ensureAuthenticated, isAdmin } = require('../config/auth');
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/uploads')
@@ -21,7 +26,7 @@ var upload = multer({
 
 
 
-router.get('/articles',async (req, res) =>{
+router.get('/articles',isAdmin,async (req, res) =>{
   const articles = await Article.find().sort({
     createdAt: 'desc'
   }); 
@@ -36,12 +41,12 @@ router.get('/articles/:slug',async (req, res)=>{
 
 
 
-router.get('/create', (req, res) =>{
+router.get('/create',isAdmin, (req, res) =>{
   res.render('admin/create_article',{article: new Article()});
 });
 
 
-router.get('/edit/:id',async (req, res) =>{
+router.get('/edit/:id', isAdmin, async (req, res) =>{
   const article = await Article.findById(req.params.id);
   res.render('admin/edit_articles',{article: article});
 });
@@ -67,10 +72,10 @@ router.post('/create', upload, async (req, res)=>{
 
 });
 
-router.put('/:id',async(req, res, next)=>{
+router.put('/:id',upload,async(req, res, next)=>{
   req.article = await Article.findById(req.params.id);
   next();
-},saveArticleAndRedirect('edit'));
+},saveArticleAndRedirect('admin/edit'));
 
 router.delete('/:id', async(req, res)=>{
   await Article.findByIdAndDelete(req.params.id);
@@ -83,8 +88,8 @@ function saveArticleAndRedirect(path) {
     article.title = req.body.title
     article.description = req.body.description
     article.markdown = req.body.markdown
-    image: req.file.filename
     cmtImage: req.body.cmtImage 
+
     try {
       article = await article.save()
       res.redirect(`/admin/articles/${article.slug}`)
@@ -97,5 +102,3 @@ function saveArticleAndRedirect(path) {
 
 
 module.exports = router;
-
-

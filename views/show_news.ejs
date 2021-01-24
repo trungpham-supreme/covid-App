@@ -1,16 +1,30 @@
 <%- include('./_layouts/adminheader') %>
 
+<div class="container mt-4 mb-4">        
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="row ">
+            <ul class="list-group">
+            <li class="list-group-item"><a href="/web/info">Thông tin covid-19 <img width="40" height="40" src="/images/icons8vr.png"></a></li>
+            <li class="list-group-item"><a href="/web/news">Tin tức mới nhất <img width="40" height="40" src="/images/news.png"></a></li>
+            <li class="list-group-item"><a href="/web/tips">Điều cần biết  <img width="40" height="35" src="/images/know.png"></a></li>
+            </ul>
+          </div>
 
-
-	<div class="container mt-4 mb-4">
-		<div class="row">
-		<div class="col-sm-3">
-				<ul class="list-group">
-					  <li class="list-group-item"><a href="info">Thông tin covid-19 <img width="40" height="40" src="/images/icons8vr.png"></a></li>
-					  <li class="list-group-item"><a href="news">Tin tức mới nhất <img width="40" height="40" src="/images/news.png"></a></li>
-					  <li class="list-group-item"><a href="">Điều cần biết  <img width="40" height="35" src="/images/know.png"></a></li>
-					</ul>
-			</div>			
+          <div class="row mt-4 text-center global" >
+          <ul class="list-group" >
+            <li class="list-group-item"><h3><b>THẾ GIỚI</b></h3><img width="170" height="75" src="/images/wmap.png"></li>
+            <li class="list-group-item">
+              <div><h5>Tổng số ca nhiễm</h5></div>
+              <div class="confirmed pb-3"><%= confirmed %></div>
+              <div><h5>Đã bình phục</h5></div>
+              <div class="rcv pb-3"><%= recovered %></div>
+              <div><h5>Số ca tử vong</h5></div>
+              <div class="dead pb-3"><%= deaths %></div>
+            </li>
+            </ul>
+          </div>
+        </div>			
 			<div class="col-sm-6">
 				<div><h2 class="mb-1"><%= article.title%></h2></div>
 				<div class="card-subtitle text-muted mb-2">

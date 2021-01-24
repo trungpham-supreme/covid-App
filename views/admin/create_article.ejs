@@ -16,15 +16,16 @@
 			</div>
 			<div class="form-group">
 				<label for="file">Ảnh</label>
-			  <input type="file" class="form-control" id="file" name="file" required value="<%=article.image %>">
+			  <input type="file" class="form-control-file" id="file" name="file" >
 			</div>
 			<div class="form-group">
 			  <label for="markdown">Chú thích ảnh</label>
-			  <textarea required name="cmtImage" id="cmtImage" class="form-control"><%= article.cmtImage %></textarea>
+			  <textarea  name="cmtImage" id="cmtImage" class="form-control"><%= article.cmtImage %></textarea>
 			</div>
 			<a href="/admin/articles" class="btn btn-secondary">Thoát</a>
 			<button type="submit" class="btn btn-primary">Tạo</button>
 		</form>
+
 	</div>
 
 <%- include('../_layouts/adminfooter') %>

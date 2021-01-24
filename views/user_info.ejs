@@ -1,0 +1,40 @@
+<%- include('./_layouts/adminheader') %>
+
+
+	<div class="container">
+		<h1 class="">Thông tin tài khoản</h1>
+		<form action="/users/<%= user.id%>?_method=PUT" method="POST">
+
+			<div class="form-group">
+				<label for="title" > Họ và Tên</label>
+				<input required value="<%= user.name %>" type="text" name="title" id="title" class="form-control">
+			</div>
+
+			<div class="form-group">
+			  <label for="description">Email</label>
+			  <input required value="<%= user.email %>" type="text" name="title" id="title" class="form-control">
+			</div>
+
+			<div class="form-group">
+			  <label for="password">Mật khẩu cũ</label>
+			  <input type="password" name="password" id="password" class="form-control">
+			</div>
+
+			<div class="form-group">
+			  <label for="password">Mật khẩu mới</label>
+			  <input type="password" name="password" id="password" class="form-control">
+			</div>
+
+			<div class="form-group">
+			  <label for="password">Nhập lại mật khẩu</label>
+			  <input type="password" name="password" id="password" class="form-control">
+			</div>
+
+			<button type="submit" class="btn btn-primary btn-block">Cập nhật</button>
+
+		</form>
+		
+		
+	</div>
+
+<%- include('./_layouts/adminfooter') %>

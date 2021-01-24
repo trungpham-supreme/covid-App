@@ -1,13 +1,13 @@
-<%- include('../_layouts/adminheader') %>
+ <%- include('../_layouts/adminheader') %>
 
 	<div class="container">
 		<h1 class="mb-1"><%= article.title%></h1>
-		<div><img src="/uploads/<%= article.image%>" style="width: 60px; height:60px"></div>
+		<div><img src="/uploads/<%= article.image%>" style="width: 200px; height:160px"></div>
 		<div><%= article.description%></div>
 		<div><%= article.createdAt.toLocaleDateString()%></div>	
 		<div><%= article.markdown%></div>	
-		<a href="/admin/articles" class="btn btn-secondary">All articles</a>
-		<a href="/admin/edit/<%= article.id%>" class="btn btn-info">Edit</a>
+		<a href="/admin/articles" class="btn btn-secondary">Tất cả bài đăng</a>
+		<a href="/admin/edit/<%= article.id%>" class="btn btn-info">Chỉnh sửa</a>
 	</div>
 
 

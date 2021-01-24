@@ -5,18 +5,15 @@ const methodOverride = require('method-override');
 var passport = require('passport');
 var expressValidator = require('express-validator');
 const flash = require('connect-flash');
+var path = require('path');
 const session = require('express-session');
 
-
-
-
-
- 
 
 //App use public folder
 app.use(express.static("public")); 
  
 //App set ejs
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs');
 
 
@@ -70,6 +67,13 @@ var hotline = require('./routes/hotline.js');
 var articles = require('./routes/admin_articles.js');
 var news = require('./routes/articles.js');
 var user = require('./routes/user.js');
+var chat = require('./routes/chat.js');
+var accounts = require('./routes/admin_account.js');
+
+app.get('*', function(req,res,next) {
+   res.locals.user = req.user || null;
+   next();
+});
 
 
 
@@ -78,6 +82,8 @@ app.use('/hotline',hotline);
 app.use('/admin',articles);
 app.use('/web',news);
 app.use('/users',user);
+app.use('/chat',chat);
+app.use('/accounts',accounts);
 
 
 

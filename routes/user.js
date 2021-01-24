@@ -3,17 +3,18 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
+
 const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
 
 // Get Users model
 var User = require('../models/user');
 
 // Register Page
-router.get('/register', (req, res) => res.render('register'));
+router.get('/register', (req, res) => {if (req.user) res.redirect('/'); res.render('register')});
 
 // Register
 router.post('/register', (req, res) => {
-  const { name, email, password, password2, admin } = req.body;
+  const { name, email, password, password2 } = req.body;
   let errors = [];
 
   if (!name || !email || !password || !password2) {
@@ -48,7 +49,7 @@ router.post('/register', (req, res) => {
           password2
         });
       } else {
-        const newUser = new User({
+        const user = new User({
           name: name, 
           email: email,
           password: password,
@@ -56,10 +57,10 @@ router.post('/register', (req, res) => {
         });
 
         bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
+          bcrypt.hash(user.password, salt, (err, hash) => {
             if (err) throw err;
-            newUser.password = hash;
-            newUser
+            user.password = hash;
+            user
               .save()
               .then(user => {
                 req.flash(
@@ -78,23 +79,26 @@ router.post('/register', (req, res) => {
 
 
 // Login Page
-router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
+router.get('/login', function (req, res) {
+    if (req.user) res.redirect('/');    
+    res.render('login', {
+        title: 'Log in'
+    });
+});
 
 // Login
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/users/dashboard',
+    successRedirect: '/',
     failureRedirect: '/users/login',
     failureFlash: true
   })(req, res, next);
 });
 
-// Dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) =>
-  res.render('dashboard', {
-    user: req.user
-  })
-);
+router.get('/info',ensureAuthenticated,async function (req, res) {
+  const user = await User.findOne({id:req.params.id});
+  res.render('user_info',{ user: user});
+});
 
 
 // Logout
@@ -103,6 +107,8 @@ router.get('/logout', (req, res) => {
   req.flash('success_msg', 'Đã đăng xuất tài khoản');
   res.redirect('/users/login');
 });
+
+
 
 
 

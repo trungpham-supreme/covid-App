@@ -3,11 +3,27 @@
 	<div class="container mt-4 mb-4">				
 			<div class="row">
 				<div class="col-sm-3">
-					<ul class="list-group">
+				  <div class="row ">
+            <ul class="list-group">
             <li class="list-group-item"><a href="info">Thông tin covid-19 <img width="40" height="40" src="/images/icons8vr.png"></a></li>
             <li class="list-group-item"><a href="news">Tin tức mới nhất <img width="40" height="40" src="/images/news.png"></a></li>
-            <li class="list-group-item"><a href="">Điều cần biết  <img width="40" height="35" src="/images/know.png"></a></li>
-          </ul>
+            <li class="list-group-item"><a href="tips">Điều cần biết  <img width="40" height="35" src="/images/know.png"></a></li>
+            </ul>
+          </div>
+
+          <div class="row mt-4 text-center global" >
+          <ul class="list-group" >
+            <li class="list-group-item"><h3><b>THẾ GIỚI</b></h3><img width="170" height="75" src="/images/wmap.png"></li>
+            <li class="list-group-item">
+              <div><h5>Tổng số ca nhiễm</h5></div>
+              <div class="confirmed pb-3"><%= confirmed %></div>
+              <div><h5>Đã bình phục</h5></div>
+              <div class="rcv pb-3"><%= recovered %></div>
+              <div><h5>Số ca tử vong</h5></div>
+              <div class="dead pb-3"><%= deaths %></div>
+            </li>
+            </ul>
+          </div>
 				</div>
 
 				<div class="col-sm-9 mt-2">
@@ -22,21 +38,21 @@
     <div class="carousel-item active">
       <img src="/images/covid2.png" alt="Los Angeles" width="800" height="350">
       <div class="carousel-caption">
-        <h3>Los Angeles</h3>
+        <h3>Virus Covid-19</h3>
         <p>We had such a great time in LA!</p>
       </div>   
     </div>
     <div class="carousel-item">
       <img src="/images/covid3.png" alt="Chicago" width="800" height="350">
       <div class="carousel-caption">
-        <h3>Chicago</h3>
+        <h3>Vacxin Covid-19</h3>
         <p>Thank you, Chicago!</p>
       </div>   
     </div>
     <div class="carousel-item">
       <img src="/images/covid4.jpg"  alt="New York" width="800" height="350">
       <div class="carousel-caption">
-        <h3>New York</h3>
+        <h3>Virus Covid-19</h3>
         <p>We love the Big Apple!</p>
       </div>   
     </div>
