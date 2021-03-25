@@ -17,6 +17,8 @@ router.post('/register', (req, res) => {
   const { name, email, password, password2 } = req.body;
   let errors = [];
 
+  if (req.user) res.redirect('/');
+
   if (!name || !email || !password || !password2) {
     errors.push({ msg: 'Vui lòng điền đầy đủ thông tin' });
   }
@@ -99,6 +101,8 @@ router.get('/info',ensureAuthenticated,async function (req, res) {
   const user = await User.findOne({id:req.params.id});
   res.render('user_info',{ user: user});
 });
+
+
 
 
 // Logout

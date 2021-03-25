@@ -19,7 +19,7 @@
       </div>
       <div class="col-sm-3 total-cases">
         <div class="title">Tổng số ca nhiễm</div>
-        <div class="value">0</div>
+        <div class="value"></div>
         <div class="new-value">+0</div>
       </div>
       <div class="col-sm-3 recovered">
@@ -37,6 +37,30 @@
       <canvas id="axes_line_chart"></canvas>
     </div>
   </div>
+
+  <div class="container-fluid mt-4">
+    <div class="row">
+    <div class="col-sm-2 text-center global" >
+          <ul class="list-group" >
+            <li class="list-group-item"><h4><b>THẾ GIỚI</b></h4><img width="150" height="60" src="/images/wmap.png"></li>
+            <li class="list-group-item">
+              <div><h6>Tổng số ca nhiễm</h6></div>
+              <div class="confirmed pb-3"><%= confirmed %></div>
+              <div><h6>Đã bình phục</h6></div>
+              <div class="rcv pb-3"><%= recovered %></div>
+              <div><h6>Số ca tử vong</h6></div>
+              <div class="dead pb-3"><%= deaths %></div>
+            </li>
+            </ul>
+          </div>
+       
+        <div class="col-sm-10 mt-2 mb-2 text-center bn-list">
+          <%- siteHeading%>
+        </div>
+  </div>
+  </div>
+
+
 
 <%- include('./_layouts/adminfooter') %>
   

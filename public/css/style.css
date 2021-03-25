@@ -244,3 +244,13 @@ nav a{
 	font-size: 22px;
 	font-weight: bold;
 }
+
+
+.bn-list{
+	
+	top:30px;
+	height: 350px;
+	width: 95%;
+	overflow-y: scroll;
+}
+

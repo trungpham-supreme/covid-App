@@ -7,6 +7,13 @@ var expressValidator = require('express-validator');
 const flash = require('connect-flash');
 var path = require('path');
 const session = require('express-session');
+const http = require('http').createServer(app);
+var request = require('request');
+var cheerio = require('cheerio');
+
+
+
+const PORT = process.env.PORT || 3000
 
 
 //App use public folder
@@ -77,6 +84,7 @@ app.get('*', function(req,res,next) {
 
 
 
+
 app.use('/',home);
 app.use('/hotline',hotline);
 app.use('/admin',articles);
@@ -85,9 +93,40 @@ app.use('/users',user);
 app.use('/chat',chat);
 app.use('/accounts',accounts);
 
+// Socket 
+const io = require('Socket.io')(http)
 
+io.on('connection', (socket) => {
+    console.log('Connected...')
+    socket.on('message', (msg) => {
+        socket.broadcast.emit('message', msg)
+    })
 
+})
 
-app.listen(3000, function(){
-	console.log('Server staring on port 3000');
+app.get('/ccc', function(req, res){
+	request("https://vnexpress.net", function(error, response, body){
+		if(error){
+			console.log(error);
+			res.render('xxx', {html: 'Error!!'});
+		}
+		else{
+			$ = cheerio.load(body);
+			var ds = $(body).find('a.txt_link');
+
+			res.render('xxx', {html: body});
+
+		}
+	});
 });
+
+app.get('/as',(req, res)=>{
+    res.render('a');
+})
+
+
+
+
+http.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`)
+})
