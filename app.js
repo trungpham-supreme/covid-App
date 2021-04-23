@@ -104,25 +104,6 @@ io.on('connection', (socket) => {
 
 })
 
-app.get('/ccc', function(req, res){
-	request("https://vnexpress.net", function(error, response, body){
-		if(error){
-			console.log(error);
-			res.render('xxx', {html: 'Error!!'});
-		}
-		else{
-			$ = cheerio.load(body);
-			var ds = $(body).find('a.txt_link');
-
-			res.render('xxx', {html: body});
-
-		}
-	});
-});
-
-app.get('/as',(req, res)=>{
-    res.render('a');
-})
 
 
 
