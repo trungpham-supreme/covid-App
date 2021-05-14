@@ -329,7 +329,9 @@ function fetchData(country) {
       requestOptions
     )
       .then((res) => {
+        console.log('xcvxcv');
         return res.json();
+        
       })
       .then((data) => {
         data.forEach((entry) => {
