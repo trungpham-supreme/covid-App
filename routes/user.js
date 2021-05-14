@@ -33,6 +33,7 @@ router.post('/register', (req, res) => {
 
   if (errors.length > 0) {
     res.render('register', {
+      user: null,
       errors,
       name,
       email,
@@ -44,6 +45,7 @@ router.post('/register', (req, res) => {
       if (user) {
         errors.push({ msg: 'Email đã tồn tại' });
         res.render('register', {
+          user: null,
           errors,
           name,
           email,
@@ -69,7 +71,7 @@ router.post('/register', (req, res) => {
                   'success_msg',
                   'Tạo tài khoản thành công, bạn có thể đăng nhập'
                 );
-                res.redirect('/users/login');
+                res.redirect('/login');
               })
               .catch(err => console.log(err));
           });
@@ -100,6 +102,12 @@ router.post('/login', (req, res, next) => {
 router.get('/info',ensureAuthenticated,async function (req, res) {
   const user = await User.findOne({id:req.params.id});
   res.render('user_info',{ user: user});
+});
+
+router.put('/info/:id',async (req, res)=>{
+  const user = await User.findOne({email: req.body.email});
+  console.log(user);
+
 });
 
 
