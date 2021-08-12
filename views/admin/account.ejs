@@ -11,7 +11,7 @@
 						<%= user.date.toLocaleDateString(); %>
 					</div>
 					<div class="card-text mb-2"><%= user.email%></div>
-					<a href="/admin/edit/<%= user.id%>" class="btn btn-info" >Chỉnh sửa</a>
+					
 					<form action="/accounts/<%= user.id %>?_method=DELETE" method="POST" class="d-inline">
 						<button type="submit" class="btn btn-danger" >Xóa</button>
 					</form>

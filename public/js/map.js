@@ -1,10 +1,10 @@
 const mapboxToken = 'pk.eyJ1IjoiaWNvbmljODgiLCJhIjoiY2tvanVqanY0MWZsdjJvcDFleGpqeGdibCJ9.kc3FDCSzAfNeldMSRCXStg';
 var list_country = [];
 const getCasesColor = count =>{
-  if(count >= 10000){
+  if(count >= 100000){
     return "red";
   }
-  if(count >= 1000){
+  if(count >= 20000){
     return "blue";
   }
   return "gray";

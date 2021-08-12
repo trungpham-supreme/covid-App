@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
   }
 
   if (password != password2) {
-    errors.push({ msg: 'mật khẩu không trùng khớp' });
+    errors.push({ msg: 'Mật khẩu không trùng khớp' });
   }
 
   if (password.length < 6) {
@@ -71,7 +71,7 @@ router.post('/register', (req, res) => {
                   'success_msg',
                   'Tạo tài khoản thành công, bạn có thể đăng nhập'
                 );
-                res.redirect('/login');
+                res.redirect('/users/login');
               })
               .catch(err => console.log(err));
           });
@@ -99,18 +99,16 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/info',ensureAuthenticated,async function (req, res) {
-  const user = await User.findOne({id:req.params.id});
+router.get('/info',ensureAuthenticated,async (req, res)=> {
+  const user = await User.findById(req.user.id);
   res.render('user_info',{ user: user});
 });
 
-router.put('/info/:id',async (req, res)=>{
-  const user = await User.findOne({email: req.body.email});
-  console.log(user);
-
-});
-
-
+router.put('/info',ensureAuthenticated,async (req, res, next)=> {
+  
+   await User.findById(req.user.id);
+   next();
+  },saveUserAndRedirect('user/info'));
 
 
 // Logout
@@ -119,6 +117,55 @@ router.get('/logout', (req, res) => {
   req.flash('success_msg', 'Đã đăng xuất tài khoản');
   res.redirect('/users/login');
 });
+
+
+function saveUserAndRedirect(path) {
+  return async (req, res) => {
+    const errors = [];
+    let user = req.user
+    user.name = req.body.name
+    user.password = req.body.password
+    user.password2 = req.body.password2
+    if (user.password != user.password2) {
+      errors.push({ msg: 'Mật khẩu không trùng khớp' });
+    }
+    if (user.name.length < 6) {
+      errors.push({ msg: 'Tên tối thiểu có 6 ký tự' });
+    }
+  
+    if (user.password.length < 6) {
+      errors.push({ msg: 'Mật khẩu tối thiểu có 6 ký tự' });
+    }
+  
+    if (errors.length > 0) {
+      res.render('user_info', {
+        errors,
+        user: user
+      });
+    } else
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
+          if (err) throw err;
+          user.password = hash;
+          user
+            .save()
+            .then(user => {
+              req.flash(
+                'success_msg',
+                'Đổi thông tin tài khoản thành công'
+              );
+              res.redirect('/users/info');
+            })
+            .catch(err => console.log(err));
+        });
+      });
+
+
+      
+     
+  }
+}
 
 
 

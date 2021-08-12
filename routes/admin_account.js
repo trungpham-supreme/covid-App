@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 
 router.get('/',async (req, res) =>{
-  const users = await User.find().sort({
+  const users = await User.find({admin: 0}).sort({
     date: 'desc'
   }); 
   res.render('admin/account',{ users: users});
